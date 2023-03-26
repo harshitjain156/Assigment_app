@@ -1,4 +1,4 @@
-# first_app
+# Assigment App
 
 A new Flutter project.
 

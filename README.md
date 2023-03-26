@@ -6,7 +6,7 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-To run the app simply download the apk file [from here](/https://github.com/harshitjain156/Assigment_app/blob/master/AssigmentApp.apk)
+To run the app simply download the apk file [from here](/AssigmentApp.apk)
 
 ##Steps
 

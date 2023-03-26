@@ -6,11 +6,18 @@ A new Flutter project.
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+To run the app simply download the apk file [from here](/https://github.com/harshitjain156/Assigment_app/blob/master/AssigmentApp.apk)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+##Steps
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. Login to the apllication
+2. Add articles 
+3. Check profile
+
+##About the App
+
+The app is develop using flutter. For easily access ana demo don't use any external 
+database.This app use local storage of the mobile phone for storing data.
+
+For help Query with this app, connect 
+[Linkedin](https://www.linkedin.com/in/harshitjain-work/),

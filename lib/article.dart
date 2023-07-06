@@ -3,59 +3,34 @@ import 'package:first_app/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MyObject {
-  final String name;
-  var age;
+class ArticleObject {
+  final String title;
+  final String article;
 
-  MyObject({required this.name, required this.age});
+  ArticleObject({required this.title, required this.article});
 
   Map<String, dynamic> toMap() {
-    return {'name': name, 'age': age};
+    return {'title': title, 'article': article};
   }
 
-  factory MyObject.fromJson(Map<String, dynamic> json) {
-    return MyObject(name: json['name'], age: json['age']);
+  factory ArticleObject.fromJson(Map<String, dynamic> json) {
+    return ArticleObject(title: json['title'], article: json['article']);
   }
 }
 
-class MyApp5 extends StatelessWidget {
-  const MyApp5({super.key});
 
-  // This widget is the root of your application.
+class ArticlePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyApp3(),
-    );
-  }
+  _ArticlePageState createState() => _ArticlePageState();
 }
 
-class MyApp3 extends StatefulWidget {
-  @override
-  _MyApp3State createState() => _MyApp3State();
-}
-
-class _MyApp3State extends State<MyApp3> {
+class _ArticlePageState extends State<ArticlePage> {
   final _formKey = GlobalKey<FormState>();
   var name;
 
   var title = TextEditingController();
   var body = TextEditingController();
-  List<MyObject> _myObjects = [];
+  List<ArticleObject> _myObjects = [];
 
   @override
   void initState() {
@@ -69,8 +44,8 @@ class _MyApp3State extends State<MyApp3> {
     String? myObjectsJson = prefs.getString('myObjects');
     if (myObjectsJson != null) {
       Iterable decoded = json.decode(myObjectsJson);
-      List<MyObject> objects =
-          decoded.map((e) => MyObject.fromJson(e)).toList();
+      List<ArticleObject> objects =
+          decoded.map((e) => ArticleObject.fromJson(e)).toList();
       setState(() {
         _myObjects = objects;
       });
@@ -93,8 +68,8 @@ class _MyApp3State extends State<MyApp3> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      MyObject newObject = MyObject(
-          name: title.text.toString(), age: body.text.toString());
+      ArticleObject newObject = ArticleObject(
+          title: title.text.toString(), article: body.text.toString());
       setState(() {
         _myObjects.add(newObject);
       });
@@ -189,7 +164,7 @@ class _MyApp3State extends State<MyApp3> {
                             decoration: InputDecoration(label: Text("Title")),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your Country';
+                                return 'Please enter Title';
                               }
                               return null;
                             },
@@ -199,7 +174,7 @@ class _MyApp3State extends State<MyApp3> {
                             decoration: InputDecoration(label: Text("Body")),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter your Country';
+                                return 'Please enter data';
                               }
                               return null;
                             },
@@ -229,7 +204,7 @@ class _MyApp3State extends State<MyApp3> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  _myObjects[index].name.toString(),
+                                  _myObjects[index].title.toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
@@ -265,7 +240,7 @@ class _MyApp3State extends State<MyApp3> {
                                 ),
                                 SizedBox(height: 10),
                                 Text(
-                                  _myObjects[index].age.toString(),
+                                  _myObjects[index].article.toString(),
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),
@@ -290,27 +265,6 @@ class _MyApp3State extends State<MyApp3> {
                         ],
                       ),
                     );
-                      // Card(
-                      //   margin: const EdgeInsets.symmetric(
-                      //       vertical: 5.0, horizontal: 30.0),
-                      //   child: Container(
-                      //     margin: const EdgeInsets.symmetric(
-                      //         vertical: 10.0, horizontal: 30.0),
-                      //     child: Column(
-                      //       mainAxisAlignment: MainAxisAlignment.end,
-                      //       children: [
-                      //         Title(
-                      //             color: Colors.black,
-                      //             child:
-                      //                 Text(_myObjects[index].name, textAlign: TextAlign.left,textScaleFactor: 1.2)),
-                      //         Text(_myObjects[index].age,textAlign: TextAlign.left,)
-                      //       ],
-                      //     ),
-                      //   ));
-                    //   ListTile(
-                    //   title: Text(_myObjects[index].name),
-                    //   subtitle: Text('Age: ${_myObjects[index].age}'),
-                    // );
                   },
                 ),
               ),

@@ -42,7 +42,6 @@ class _ProfilePageState extends State<ProfilePage> {
   var gender;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getValue();
     setState(() {

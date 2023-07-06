@@ -1,44 +1,13 @@
 import 'dart:convert';
 
-import 'package:first_app/abc.dart';
-import 'package:first_app/artice_page.dart';
+import 'package:first_app/article.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-// void main() {
-//   runApp(const MyApp());
-// }
 
-// class MyApp2 extends StatelessWidget {
-//   const MyApp2({super.key});
-//
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//
-//       title: 'Login',
-//       theme: ThemeData(
-//         // This is the theme of your application.
-//         //
-//         // Try running your application with "flutter run". You'll see the
-//         // application has a blue toolbar. Then, without quitting the app, try
-//         // changing the primarySwatch below to Colors.green and then invoke
-//         // "hot reload" (press "r" in the console where you ran "flutter run",
-//         // or simply save your changes to "hot reload" in a Flutter IDE).
-//         // Notice that the counter didn't reset back to zero; the application
-//         // is not restarted.
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: MyHomePage2(title: 'first app',),
-//     );
-//   }
-// }
-
-class MyHomePage2 extends StatefulWidget {
-  const MyHomePage2({super.key, required this.title});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key, required this.title});
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -52,18 +21,17 @@ class MyHomePage2 extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage2> createState() => _MyHomePage2State();
+  State<LoginPage> createState() => _LoginPageState();
 
 }
 
-class _MyHomePage2State extends State<MyHomePage2> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getValue();
   }
   var name=TextEditingController();
   var age=TextEditingController();
@@ -71,19 +39,6 @@ class _MyHomePage2State extends State<MyHomePage2> {
   var country=TextEditingController();
   var hobbies=TextEditingController();
   var number=TextEditingController();
-  int _counter = 0;
-  var display;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +62,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
           // in the middle of the parent.
           child:Card(
             margin: const EdgeInsets.all(20.0),
-            shadowColor: Color.fromARGB(0, 0, 0, 200),
+            shadowColor: const Color.fromARGB(0, 0, 0, 200),
             borderOnForeground: true,
             elevation: 10,
             color: Colors.transparent,
@@ -117,7 +72,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                 children: [
                   TextFormField(
                     controller: name,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         label: Text("Name")
                     ),
                     validator: (value) {
@@ -129,7 +84,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                   ),
                   TextFormField(
                     controller: age,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         label: Text("Age")
                     ),
                     validator: (value) {
@@ -142,7 +97,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                   ),
                   TextFormField(
                     controller: gender,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         label: Text("Gender")
                     ),
                     validator: (value) {
@@ -155,7 +110,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                   ),
                   TextFormField(
                     controller: hobbies,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         label: Text("Hobbies")
                     ),
                     validator: (value) {
@@ -168,7 +123,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                   ),
                   TextFormField(
                     controller: country,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         label: Text("Country")
                     ),
                     validator: (value) {
@@ -181,7 +136,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                   ),
                   TextFormField(
                     controller: number,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         label: Text("Mobile No.")
                     ),
                     validator: (value) {
@@ -192,7 +147,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
                     },
 
                   ),
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -211,13 +166,10 @@ class _MyHomePage2State extends State<MyHomePage2> {
                           print(_formKey.currentState!.validate());
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MyApp3()),);
+                            MaterialPageRoute(builder: (context) => ArticlePage()),);
                         }
-                        setState(() {
-                          getValue();
-                        });
 
-                      }, child:Text("Login")),
+                      }, child:const Text("Login")),
                     ],
                   )
 
@@ -233,25 +185,7 @@ class _MyHomePage2State extends State<MyHomePage2> {
     );
   }
 
-  void getValue() async {
-    var prefs=await SharedPreferences.getInstance();
-    display=prefs.getString("name");
-    print(display);
 
-  }
-
-  void validate() {
-    // if (_formKey.currentState!.validate()) {
-    //   _formKey.currentState!.save();
-    //   var prefs=await SharedPreferences.getInstance();
-    //   prefs.setString("name", name.text.toString());
-    //   prefs.setString("age", age.text.toString());
-    //   prefs.setString("number", number.text.toString());
-    //   prefs.setString("country", country.text.toString());
-    //   prefs.setString("gender", gender.text.toString());
-    //   prefs.setBool('log', true);
-    // }
-  }
 }
 
 
